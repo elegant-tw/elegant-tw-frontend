@@ -1,4 +1,3 @@
-import AppHeader from '@/components/AppHeader'
 import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import { GoogleAnalytics } from "nextjs-google-analytics";
