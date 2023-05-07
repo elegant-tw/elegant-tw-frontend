@@ -37,12 +37,16 @@ import {
   SunIcon,
   HamburgerIcon
 } from "@chakra-ui/icons"
+import { FaSmileBeam, FaSkull } from "react-icons/fa"
 import router from "next/router";
+import { useEffect } from "react";
 import exploreRouterMenu from "./RouterMenu";
 
 // Fork from: https://medium.com/@pal.amittras/exploring-chakra-ui-part-3-building-a-responsive-app-header-and-sidebar-with-chakra-ui-8109fcdcb38d
 
-function AppHeader() {
+function AppHeader(props: any) {
+  const toxicEnabled = props.toxicEnabled;
+  const changeToxicEnabled = props.changeToxicEnabled;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -122,6 +126,12 @@ function AppHeader() {
                 </Menu>
               ))}
             </Box>
+            <IconButton
+              size={"sm"}
+              icon={toxicEnabled ? <FaSkull /> : <FaSmileBeam />}
+              aria-label={"Toxic Mode"}
+              onClick={changeToxicEnabled}
+            />
             <IconButton
               size={"sm"}
               icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}

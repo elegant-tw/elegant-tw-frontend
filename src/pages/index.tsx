@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react'
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
+import { useState } from "react";
 
 type Sentence = {
   id: number,
@@ -20,7 +21,12 @@ type Sentence = {
 const fetcher = (url: string) => fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`).then((r) => r.json());
 
 export default function Home() {
-  const { data: sentence, error } = useSWR<Sentence>("/", fetcher, {
+  const [toxicEnabled, setToxicEnabled] = useState(false);
+  const changeToxicEnabled = () => {
+    setToxicEnabled(!toxicEnabled);
+  }
+
+  const { data: sentence, error } = useSWR<Sentence>(toxicEnabled ? "/all" : "/", fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
@@ -29,7 +35,10 @@ export default function Home() {
 
   return (
     <>
-      <AppHeader />
+      <AppHeader
+        toxicEnabled={toxicEnabled}
+        changeToxicEnabled={changeToxicEnabled}
+      />
       <Flex
         w={'full'}
         h={'100vh'}
