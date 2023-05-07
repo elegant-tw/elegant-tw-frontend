@@ -1,5 +1,5 @@
 import { IconType } from "react-icons"
-import { FaGithub } from "react-icons/fa"
+import { FaGithub, FaBookOpen } from "react-icons/fa"
 
 type SectionItem = {
   label: string,
@@ -16,8 +16,14 @@ type Section = {
 const exploreRouterMenu : Section[] = [
   {
     sectionId: "About",
-    sectionLabel: "關於我們",
+    sectionLabel: "關於言雅",
     sectionItems: [
+      {
+        label: "說明文件",
+        path: "https://docs.elegant.tw",
+        Icon: FaBookOpen,
+        external: true,
+      },
       {
         label: "GitHub",
         path: "https://github.com/elegant-tw",
